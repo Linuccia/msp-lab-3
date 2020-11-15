@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>Лабораторная 3</title>
+    <link rel="shortcut icon" href="https://cdn.iconscout.com/icon/premium/png-256-thumb/orthodox-cross-742265.png"/>
+<!--    <script src="resources/scripts/clock.js" type="javascript"></script>-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="javascript"></script>-->
+<!--    <link rel="stylesheet" type="text/css" href="resources/styles.css"/>-->
+    <h:outputStylesheet  name="styles.css"/>
+    <h:outputScript library="scripts" name="clock.js"/>
+</h:head>
+
+<h:body>
+    <div class="hat">
+        Вариант 2740
+        <br/>Курашов Олег, Стефанская Полина
+        <br/>Группа P3231
+    </div>
+    <div class="base">
+        <img src="resources/kitten.gif" id="kitten" alt="cat"/>
+        <div id="clock" class="clock"></div>
+<!--        <a href="main.xhtml">-->
+<!--            <button type="submit" id="redirect"><span class="redir_text">На главную</span></button>-->
+<!--        </a>-->
+        <h:button id="redirect" value="На главную" outcome="toMain">
+<!--            <f:ajax execute="@form" render="table" />-->
+        </h:button>
+    </div>
+</h:body>
+</html>
