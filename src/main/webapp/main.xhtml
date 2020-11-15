@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ace="http://www.icesoft.com/icefaces/component">
+
+<h:head>
+    <title>Лабораторная 3</title>
+    <link rel="shortcut icon" href="resources/orthodox-cross-742265.png"/>
+<!--    <script src="resources/scripts/script.js" type="javascript"></script>-->
+<!--    <script src="resources/scripts/map.js" type="javascript"></script>-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="javascript"></script>-->
+    <h:outputStylesheet  name="styles.css"/>
+    <h:outputScript library="scripts" name="script.js"/>
+    <h:outputScript library="scripts" name="map.js"/>
+    <h:outputScript src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"/>
+<!--    <link rel="stylesheet" type="text/css" href="resources/styles.css"/>-->
+</h:head>
+
+<h:body>
+    <div class="hat">
+        Вариант 2740
+        <br/>Курашов Олег, Стефанская Полина
+        <br/>Группа P3231
+    </div>
+    <div class="base">
+        <img src="resources/cattt.gif" id="cat" alt="cat"/>
+        <div class="xyr_in" id="form">
+            <div class="x_in">
+                <strong class="chooseX">Choose X:</strong>
+                <ace:sliderEntry id="slider_x" value="#{Check.x}" min="-2" max="2" stepPercent="10">
+                    <ace:ajax render="xValue" event="slide" execute="X"/>
+                </ace:sliderEntry>
+            </div>
+            <div class="textY">
+                <label>
+                    <strong>Enter Y in [-3;3]:</strong>
+                    <span class="exceptionY"></span>
+                    <h:inputText id="y_in" value="#{Check.y}" maxlength="25">
+                        <f:validateDoubleRange minimum="-3.0" maximum="3.0" />
+<!--                        <ace:ajax execute="y" render="exceptionY"/>-->
+                    </h:inputText>
+                </label>
+            </div>
+            <div class="radioR">
+                <label>
+                    <strong>Choose R:</strong>
+                    <h:selectOneRadio value="#{Check.r}" id="r_in" shape="circle">
+                        <f:selectItem styleClass="radioItem" itemValue = "1" itemLabel = "1" />
+                        <f:selectItem styleClass="radioItem" itemValue = "1.5" itemLabel = "1.5" />
+                        <f:selectItem styleClass="radioItem" itemValue = "2" itemLabel = "2" />
+                        <f:selectItem styleClass="radioItem" itemValue = "2.5" itemLabel = "2.5" />
+                        <f:selectItem styleClass="radioItem" itemValue = "3" itemLabel = "3" />
+                    </h:selectOneRadio>
+                </label>
+            </div>
+<!--            <div class="send_but">-->
+<!--                <button type="submit" id="send" onclick="location.href='/Check'"><span class="send_but_text">Отправить</span></button>-->
+<!--            </div>-->
+            <div class="send_but">
+                <h:commandButton id="send" value="Отправить" action="#{Check.newPoint()}">
+<!--                    <span class="send_but_text">Отправить</span>-->
+                    <f:ajax execute="@form" render="table" />
+                </h:commandButton>
+            </div>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="400" height="400" class="graph">
+            <line class="axes" x1="0" x2="400" y1="200" y2="200" stroke="black"></line>
+            <line x1="200" x2="200" y1="0" y2="400" stroke="black"></line>
+            <polygon points="200,0 194,25 206,25" stroke="black"></polygon>
+            <polygon points="400,200 375,206 375,194" stroke="black"></polygon>
+
+            <line x1="260" x2="260" y1="205" y2="195" stroke="black"></line>
+            <line x1="320" x2="320" y1="205" y2="195" stroke="black"></line>
+
+            <line x1="80"  x2="80"  y1="205" y2="195" stroke="black"></line>
+            <line x1="140" x2="140" y1="205" y2="195" stroke="black"></line>
+
+            <line x1="195" x2="205" y1="140" y2="140" stroke="black"></line>
+            <line x1="195" x2="205" y1="80"  y2="80"  stroke="black"></line>
+
+            <line x1="195" x2="205" y1="260" y2="260" stroke="black"></line>
+            <line x1="195" x2="205" y1="320" y2="320" stroke="black"></line>
+
+            <text x="250" y="190">R/2</text>
+            <text x="315" y="190">R</text>
+
+            <text x="70" y="190">-R</text>
+            <text x="125" y="190">-R/2</text>
+
+            <text x="210" y="145">R/2</text>
+            <text x="210" y="85">R</text>
+
+            <text x="210" y="265">-R/2</text>
+            <text x="210" y="325">-R</text>
+
+            <polygon points="140,200 140,80 200,80, 200,200" fill="purple" fill-opacity="0.3" stroke="purple"></polygon>
+
+            <path d="M 260 200 A 70 70, 0, 0, 1, 200 260 L 200 200 Z" fill="purple" fill-opacity="0.3" stroke="purple"></path>
+
+            <polygon points="200,140 200,200 320,200" fill="purple" fill-opacity="0.3" stroke="purple"></polygon>
+
+            <circle r="3" cx="200" cy="200" id="point" fill="black" ></circle>
+        </svg>
+        <h:dataTable value="#{Check.points}" var="point" styleClass="result" cellspacing="0" headerClass="result_head"
+        rowClasses="table_row">
+            <h:column>
+                <f:facet name="header">X</f:facet>
+                #{point.getX}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Y</f:facet>
+                #{point.getY}
+            </h:column>
+            <h:column>
+                <f:facet name="header">R</f:facet>
+                #{point.getR}
+            </h:column>
+            <h:column>
+                <f:facet name="header">HIT</f:facet>
+                #{point.getHit}
+            </h:column>
+            <h:column>
+                <f:facet name="header">TIME</f:facet>
+                #{point.getTime}
+            </h:column>
+            <h:column>
+                <f:facet name="header">RUNTIME</f:facet>
+                #{point.getRuntime}
+            </h:column>
+        </h:dataTable>
+
+<!--        <a href="index.xhtml">-->
+<!--            <button type="submit" id="toStart"><span class="redir_text">На стартовую</span></button>-->
+<!--        </a>-->
+        <h:button id="toStart" value="На стартовую" outcome="toStart">
+<!--            <span class="redir_text">Отправить</span>-->
+        </h:button>
+<!--        <table class="result" cellspacing="0">-->
+<!--            <tr class="result_head">-->
+<!--                <th>X</th>-->
+<!--                <th>Y</th>-->
+<!--                <th>R</th>-->
+<!--                <th>HIT</th>-->
+<!--                <th>TIME</th>-->
+<!--                <th>RUNTIME</th>-->
+<!--            </tr>-->
+<!--        </table>-->
+    </div>
+</h:body>
+</html>
