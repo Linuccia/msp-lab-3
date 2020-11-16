@@ -6,11 +6,11 @@ function XYR(){
 
 function checkY(x, y, r) {
     if (!y) {
-        return exceptionY('<br>Вы не ввели Y')
+        return exceptionY('<br>Вы не ввели Y</br>')
     } else if (isNaN(y)) {
-        return exceptionY('<br>Y должен быть числом')
+        return exceptionY('<br>Y должен быть числом</br>')
     } else if (y < -3 || y > 3) {
-        return exceptionY('<br>Y не принадлежит [-3:3]')
+        return exceptionY('<br>Y не принадлежит [-3:3]</br>')
     } else {
         $('.exceptionY').html('');
         return true
@@ -24,18 +24,18 @@ function exceptionY(message) {
 }
 
 $(function () {
-// $('#send').on('click', function (event) {
-// XYR();
-// if(checkY(x, y, r)) {
-// $.get(
-// "/CheckArea",
-// {x: x, y: y, r: r}
-// )
-// // drawPoints(x, y, r)
-// } else {
-// event.preventDefault()
-// }
-// });
+    // $('#send').on('click', function (event) {
+    // XYR();
+    // if(checkY(x, y, r)) {
+    //     $.get(
+    //     "/CheckArea",
+    //     {x: x, y: y, r: r}
+    //     )
+    //     // drawPoints(x, y, r)
+    // } else {
+    //     event.preventDefault()
+    //     }
+    // });
     $('.sliderX').on('input', function (){
         XYR();
         if (checkY(x,y,r))

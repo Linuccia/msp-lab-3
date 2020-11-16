@@ -31,18 +31,19 @@
             <div class="xyr_in">
                 <div class="x_in">
                     <strong class="chooseX">Choose X:</strong>
-                    <ace:sliderEntry id="slider_x" value="#{Check.x}" min="-2" max="2" stepPercent="10">
-                        <ace:ajax render="xValue" event="slide" execute="X"/>
-                    </ace:sliderEntry>
+                    <h:inputText id="slider_x" value="#{Check.x}">
+<!--                        <ace:ajax render="xValue" event="slide" execute="X"/>-->
+                    </h:inputText>
                 </div>
 
                 <div class="textY">
                     <label>
                         <strong>Enter Y in [-3;3]:</strong>
-                        <span class="exceptionY"></span>
+<!--                        <span class="exceptionY"></span>-->
+                        <h:message  id="exceptionY" for="y_in"/>
                         <h:inputText id="y_in" value="#{Check.y}" maxlength="25">
                             <f:validateDoubleRange minimum="-3.0" maximum="3.0" />
-                            <!--                        <ace:ajax execute="y" render="exceptionY"/>-->
+                            <ace:ajax execute="y" render="exceptionY"/>
                         </h:inputText>
                     </label>
                 </div>
