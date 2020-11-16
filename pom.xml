@@ -27,11 +27,6 @@
             <artifactId>icefaces-ace</artifactId>
             <version>4.3.0</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.icefaces</groupId>-->
-<!--            <artifactId>icefaces-compat</artifactId>-->
-<!--            <version>3.3.0</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>com.sun.faces</groupId>
             <artifactId>jsf-api</artifactId>
@@ -42,11 +37,6 @@
             <artifactId>jsf-impl</artifactId>
             <version>2.2.18</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.glassfish</groupId>-->
-<!--            <artifactId>javax.faces</artifactId>-->
-<!--            <version>2.4.0</version>-->
-<!--        </dependency>-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>

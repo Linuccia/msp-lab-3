@@ -4,23 +4,23 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class CheckArea {
-    private int x = -2;
-    private double y = -3.0;
-    private double r = 1.0;
-    private boolean hit = false;
+    private Integer x = -2;
+    private Double y = -3.0;
+    private Double r = 1.0;
+    private Boolean hit = false;
     private Long startTime;
     private ArrayList <Point> points= new ArrayList<>();
 
-    public void setX(int x){this.x = x;}
-    public int getX(){
+    public void setX(Integer x){this.x = x;}
+    public Integer getX(){
         return x;
     }
-    public void setY(double y){this.y = y;}
-    public double getY(){
+    public void setY(Double y){this.y = y;}
+    public Double getY(){
         return y;
     }
-    public void setR(double r){this.r = r;}
-    public double getR(){
+    public void setR(Double r){this.r = r;}
+    public Double getR(){
         return r;
     }
 
@@ -32,17 +32,17 @@ public class CheckArea {
 
     public void setHit(){
         startTime = System.nanoTime();
-        if (x >= 0 && y >= 0 && x <= 2*y + r){
+        if (x >= 0 && y >= 0 && y <= -x/2 + r/2){
             hit = true;
             return;
         }
-        if (x <= 0 && y <= 0 && x*x + y*y <= r*r/4){
+        if (x >= 0 && y <= 0 && x*x + y*y <= r*r/4){
             hit = true;
             return;
         }
-        hit = (x <= 0 && y >= 0 && x <= -r/2 && y <= r);
+        hit = (x <= 0 && y >= 0 && x >= -r/2 && y <= r);
     }
-    public boolean getHit(){
+    public Boolean getHit(){
         setHit();
         return hit;
     }
@@ -50,7 +50,7 @@ public class CheckArea {
     public void newPoint(){
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        Point p = new Point(getX(), getY(), getR(), getHit(), LocalTime.now(), (System.nanoTime() - startTime)/100);
+        Point p = new Point(getX(), getY(), getR(), getHit(), LocalTime.now(), (System.nanoTime() - startTime));
         setPoint(p);
         session.save(p);
         session.getTransaction().commit();

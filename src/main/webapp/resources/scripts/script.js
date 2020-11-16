@@ -1,7 +1,7 @@
 function XYR(){
-    x = $('#slider_x').val();
+    x = $('#xValue').val();
     y = $('#y_in').val();
-    r = $('#r_in').val();
+    r = $('input[name=r]:checked').val();
 }
 
 function checkY(x, y, r) {
@@ -12,13 +12,13 @@ function checkY(x, y, r) {
     } else if (y < -3 || y > 3) {
         return exceptionY('<br>Y не принадлежит [-3:3]</br>')
     } else {
-        $('.exceptionY').html('');
+        $(".exceptionY").html('');
         return true
     }
 }
 
 function exceptionY(message) {
-    $('.exceptionY').html(message);
+    $(".exceptionY").html(message);
     point(0,0, 2);
     return false
 }

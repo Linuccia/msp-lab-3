@@ -14,9 +14,6 @@
     <link rel="shortcut icon" href="resources/orthodox-cross-742265.png"/>
     <h:outputStylesheet  name="styles.css"/>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<!--    <h:outputScript src="https://code.jquery.com/jquery-3.5.1.min.js"/>-->
-    <h:outputScript library="scripts" name="script.js"/>
-    <h:outputScript library="scripts" name="map.js"/>
 </h:head>
 
 <h:body>
@@ -39,11 +36,11 @@
                 <div class="textY">
                     <label>
                         <strong>Enter Y in [-3;3]:</strong>
-<!--                        <span class="exceptionY"></span>-->
-                        <h:message  id="exceptionY" for="y_in"/>
+                        <span class="exceptionY"></span>
+<!--                        <h:message  id="exceptionY" for="y_in"/>-->
                         <h:inputText id="y_in" value="#{Check.y}" maxlength="25">
                             <f:validateDoubleRange minimum="-3.0" maximum="3.0" />
-                            <ace:ajax execute="y" render="exceptionY"/>
+<!--                            <ace:ajax execute="y_in" render="exceptionY"/>-->
                         </h:inputText>
                     </label>
                 </div>
@@ -51,7 +48,7 @@
                 <div class="radioR">
                     <label>
                         <strong>Choose R:</strong>
-                        <h:selectOneRadio value="#{Check.r}" id="r_in" shape="circle">
+                        <h:selectOneRadio value="#{Check.r}" name="r" id="r_in" shape="circle">
                             <f:selectItem styleClass="radioItem" itemValue = "1" itemLabel = "1" />
                             <f:selectItem styleClass="radioItem" itemValue = "1.5" itemLabel = "1.5" />
                             <f:selectItem styleClass="radioItem" itemValue = "2" itemLabel = "2" />
@@ -63,13 +60,13 @@
 
                 <div class="send_but">
                     <h:commandButton id="send" value="Отправить" action="#{Check.newPoint()}">
-                        <f:ajax execute="@form" render="table" />
+                        <f:ajax execute="@form" render="graphTable" />
                     </h:commandButton>
                 </div>
             </div>
         </h:form>
 
-        <h:panelGroup>
+        <h:panelGroup id="graphTable">
             <ui:repeat value="#{Check.points}" var="point">
                 <h:outputScript>
                     drawPoints(point.x, point.y, point.r);
@@ -115,31 +112,30 @@
                 <circle r="3" cx="200" cy="200" id="point" fill="black" ></circle>
             </svg>
 
-            <h:dataTable value="#{Check.points}" var="point" styleClass="result" cellspacing="0" headerClass="result_head"
-                         rowClasses="table_row">
+            <h:dataTable value="#{Check.points}" var="point" styleClass="result" cellspacing="0" headerClass="result_head">
                 <h:column>
                     <f:facet name="header">X</f:facet>
-                    #{point.getX}
+                    #{point.x}
                 </h:column>
                 <h:column>
                     <f:facet name="header">Y</f:facet>
-                    #{point.getY}
+                    #{point.y}
                 </h:column>
                 <h:column>
                     <f:facet name="header">R</f:facet>
-                    #{point.getR}
+                    #{point.r}
                 </h:column>
                 <h:column>
                     <f:facet name="header">HIT</f:facet>
-                    #{point.getHit}
+                    #{point.hit}
                 </h:column>
                 <h:column>
                     <f:facet name="header">TIME</f:facet>
-                    #{point.getTime}
+                    #{point.time}
                 </h:column>
                 <h:column>
                     <f:facet name="header">RUNTIME</f:facet>
-                    #{point.getRuntime}
+                    #{point.runtime}
                 </h:column>
             </h:dataTable>
         </h:panelGroup>
@@ -148,4 +144,6 @@
         </h:button>
     </div>
 </h:body>
+<script type="text/javascript" src="resources/scripts/script.js"></script>
+<script type="text/javascript" src="resources/scripts/map.js"></script>
 </html>
