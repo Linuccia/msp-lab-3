@@ -26,7 +26,7 @@
             <groupId>org.icefaces</groupId>
             <artifactId>icefaces-ace</artifactId>
             <version>4.1.1</version>
-            <type>pom</type>
+            <scope>provided</scope>
         </dependency>
 <!--        <dependency>-->
 <!--            <groupId>javax.faces</groupId>-->

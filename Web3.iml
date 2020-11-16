@@ -52,7 +52,8 @@
     <orderEntry type="library" name="IceFaces-3.1.0" level="project" />
     <orderEntry type="library" name="org.icefaces:icefaces:4.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.postgresql:postgresql:42.2.12" level="project" />
-    <orderEntry type="library" name="Maven: org.icefaces:icefaces:4.1.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.icefaces:icefaces-ace:4.1.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.icefaces:icefaces:4.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish:javax.faces:2.4.0" level="project" />
     <orderEntry type="library" name="Maven: javax.el:javax.el-api:3.0.1-b04" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish:javax.el:3.0.1-b04" level="project" />

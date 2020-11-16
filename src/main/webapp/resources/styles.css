@@ -86,7 +86,6 @@ body{
 .slider_x{
     width: 98%;
     height: 50%;
-    border-radius: 20px;
     padding-left: 3%;
 }
 button, select, input:focus{
@@ -106,7 +105,7 @@ button, select, input:focus{
     margin-right: 0.5%;
     box-shadow: inset 0 0 6px;
 }
-#y_in{
+#j_idt10\:y_in{
     width: 95%;
     height: 35%;
     border-radius: 20px;
@@ -129,7 +128,7 @@ button, select, input:focus{
     margin-left: 0.5%;
     box-shadow: inset 0 0 6px;
 }
-#r_in {
+#j_idt10\:r_in {
     width: 98%;
     height: 35%;
     padding-left: 1%;
@@ -163,7 +162,7 @@ input[type="radio"] {
 /*.send_but_text:hover{*/
 /*    color: white;*/
 /*}*/
-#send{
+#j_idt10\:send{
     cursor: pointer;
     padding: 10px;
     border-radius: 30px;
@@ -217,7 +216,7 @@ input[type="radio"] {
     font-size: large;
     font-family: Jura, sans-serif;
 }
-#send:hover, #toStart:hover, #redirect:hover{
+#j_idt10\:send:hover, #toStart:hover, #redirect:hover{
     color: white;
 }
 #toStart{

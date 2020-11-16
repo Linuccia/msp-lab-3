@@ -14,7 +14,7 @@ public class HibernateUtil {
             ServletContext context = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
             String deploymentDirectoryPath = context.getRealPath("/");
             sessionFactory = new Configuration().configure(new File(deploymentDirectoryPath +
-                    "/WEB-INF/hibernate.cfg.xml")).buildSessionFactory();
+                    "/resources/hibernate.cfg.xml")).buildSessionFactory();
         } catch (Throwable ex) {
             throw new ExceptionInInitializerError(ex);
         }

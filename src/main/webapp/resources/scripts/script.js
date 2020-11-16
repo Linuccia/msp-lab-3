@@ -1,7 +1,7 @@
 function XYR(){
-    x = $('input[name=x]:checked').val();
-    y = $('.y_in').val();
-    r = $('.r_in').val();
+    x = document.getElementById("slider_x").val();
+    y = document.getElementById("y_in").val();
+    r = document.getElementById("r_in").val()
 }
 
 function checkY(x, y, r) {
@@ -12,48 +12,30 @@ function checkY(x, y, r) {
     } else if (y < -3 || y > 3) {
         return exceptionY('<br>Y не принадлежит [-3:3]')
     } else {
-        $('.exceptionY').html('');
+        document.querySelector('.exceptionY').html('');
         return true
     }
 }
-// function checkR(x, y, r) {
-//     if (!r) {
-//         return exceptionR('<br>Вы не ввели R')
-//     } else if (isNaN(r)) {
-//         return exceptionR('<br>R должен быть числом')
-//     } else if (r < 2 || r > 5) {
-//         return exceptionR('<br>R не принадлежит [2:5]')
-//     } else {
-//         $('.exceptionR').html('');
-//         return true
-//     }
-// }
 
 function exceptionY(message) {
-    $('.exceptionY').html(message);
+    document.querySelector('.exceptionY').html(message);
     point(0,0, 2);
     return false
 }
 
-// function exceptionR(message) {
-//     $('.exceptionR').html(message);
-//     point(0,0, 1);
-//     return false
-// }
-
 $(function () {
-    $('#send').on('click', function (event) {
-        XYR();
-        if(checkY(x, y, r)) {
-            $.get(
-                "/CheckArea",
-                {x: x, y: y, r: r}
-            )
-            drawPoints(x, y, r)
-        } else {
-            event.preventDefault()
-        }
-    });
+    // $('#send').on('click', function (event) {
+    //     XYR();
+    //     if(checkY(x, y, r)) {
+    //         $.get(
+    //             "/CheckArea",
+    //             {x: x, y: y, r: r}
+    //         )
+    //         // drawPoints(x, y, r)
+    //     } else {
+    //         event.preventDefault()
+    //     }
+    // });
     $('.sliderX').on('input', function (){
         XYR();
         if (checkY(x,y,r))
@@ -73,7 +55,7 @@ $(function () {
 });
 
 function point(x, y, r) {
-    $('#point').attr("cx", (x * 120 / r + 200))
+    document.querySelector('#point').attr("cx", (x * 120 / r + 200))
         .attr("cy", (y * -120 / r + 200));
 }
 

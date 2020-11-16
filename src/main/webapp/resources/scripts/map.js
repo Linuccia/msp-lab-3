@@ -1,6 +1,6 @@
-    x = $('input[name=x]:checked').val();
-    y = $('.y_in').val();
-    r = $('.r_in').val();
+x = document.getElementById("slider_x").val();
+y = document.getElementById("y_in").val();
+r = document.getElementById("r_in").val()
 
     let svg = document.querySelector("svg");
 
