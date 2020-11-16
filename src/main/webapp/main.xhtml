@@ -6,19 +6,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:ace="http://www.icefaces.org/icefaces/components" xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ace="http://www.icefaces.org/icefaces/components"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
     <title>Лабораторная 3</title>
     <link rel="shortcut icon" href="resources/orthodox-cross-742265.png"/>
     <h:outputStylesheet  name="styles.css"/>
-    <h:outputScript src="https://code.jquery.com/jquery-3.5.1.min.js"/>
-    <h:outputScript library="scripts" name="script.js">
-        $ = jQuery;
-    </h:outputScript>
-    <h:outputScript library="scripts" name="map.js">
-        $ = jQuery;
-    </h:outputScript>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!--    <h:outputScript src="https://code.jquery.com/jquery-3.5.1.min.js"/>-->
+    <h:outputScript library="scripts" name="script.js"/>
+    <h:outputScript library="scripts" name="map.js"/>
 </h:head>
 
 <h:body>
@@ -33,9 +31,9 @@
             <div class="xyr_in">
                 <div class="x_in">
                     <strong class="chooseX">Choose X:</strong>
-                    <h:inputText id="slider_x" value="#{Check.x}" min="-2" max="2" stepPercent="10">
+                    <ace:sliderEntry id="slider_x" value="#{Check.x}" min="-2" max="2" stepPercent="10">
                         <ace:ajax render="xValue" event="slide" execute="X"/>
-                    </h:inputText>
+                    </ace:sliderEntry>
                 </div>
 
                 <div class="textY">

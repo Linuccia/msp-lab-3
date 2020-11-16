@@ -1,22 +1,18 @@
-x = document.getElementById("slider_x").val();
-y = document.getElementById("y_in").val();
-r = document.getElementById("r_in").val()
+x = $('#slider_x').val();
+y = $('#y_in').val();
+r = $('#r_in').val();
 
-    let svg = document.querySelector("svg");
+let svg = document.querySelector("svg");
 
 $(function () {
     $('.graph').on('click', function (event) {
-        if (checkR(x, y, r)) {
-            let position = getMousePosition(svg, event);
-            x = position.x;
-            y = position.y;
-            let x_val = (((x - 200) * r / 120) / 0.5).toFixed() * 0.5;
-            point1(x_val, y, r);
-            $('input[name=x][value=\"' + x_val + '\"]').prop('checked', true);
-            $('.y_in').val(((200 - y) * r / 120).toFixed(2));
-            $('.exceptionY').html('');
-            return true
-        }else alert("Введите корректный R, а то низзя");
+        let position = getMousePosition(svg, event);
+        x = position.x;
+        y = position.y;
+        let x_val = (((x - 200) * r / 120) / 0.5).toFixed() * 0.5;
+        point1(x_val, y, r);
+        $('input[name=x][value=\"' + x_val + '\"]').prop('checked', true);
+        $('.y_in').val(((200 - y) * r / 120).toFixed(2));
     });
 });
 

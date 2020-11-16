@@ -1,7 +1,7 @@
 function XYR(){
-    x = document.getElementById("slider_x").val();
-    y = document.getElementById("y_in").val();
-    r = document.getElementById("r_in").val()
+    x = $('#slider_x').val();
+    y = $('#y_in').val();
+    r = $('#r_in').val();
 }
 
 function checkY(x, y, r) {
@@ -12,30 +12,30 @@ function checkY(x, y, r) {
     } else if (y < -3 || y > 3) {
         return exceptionY('<br>Y не принадлежит [-3:3]')
     } else {
-        document.querySelector('.exceptionY').html('');
+        $('.exceptionY').html('');
         return true
     }
 }
 
 function exceptionY(message) {
-    document.querySelector('.exceptionY').html(message);
+    $('.exceptionY').html(message);
     point(0,0, 2);
     return false
 }
 
 $(function () {
-    // $('#send').on('click', function (event) {
-    //     XYR();
-    //     if(checkY(x, y, r)) {
-    //         $.get(
-    //             "/CheckArea",
-    //             {x: x, y: y, r: r}
-    //         )
-    //         // drawPoints(x, y, r)
-    //     } else {
-    //         event.preventDefault()
-    //     }
-    // });
+// $('#send').on('click', function (event) {
+// XYR();
+// if(checkY(x, y, r)) {
+// $.get(
+// "/CheckArea",
+// {x: x, y: y, r: r}
+// )
+// // drawPoints(x, y, r)
+// } else {
+// event.preventDefault()
+// }
+// });
     $('.sliderX').on('input', function (){
         XYR();
         if (checkY(x,y,r))
@@ -55,7 +55,7 @@ $(function () {
 });
 
 function point(x, y, r) {
-    document.querySelector('#point').attr("cx", (x * 120 / r + 200))
+    $('#point').attr("cx", (x * 120 / r + 200))
         .attr("cy", (y * -120 / r + 200));
 }
 
