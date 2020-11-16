@@ -29,46 +29,44 @@
     </div>
     <div class="base">
         <img src="resources/cattt.gif" id="cat" alt="cat"/>
-        <h:form>
-            <div class="xyr_in" id="form">
-                <div class="x_in">
-                    <strong class="chooseX">Choose X:</strong>
-                    <h:inputText id="slider_x" value="#{Check.x}" min="-2" max="2" stepPercent="10">
-                        <ace:ajax render="xValue" event="slide" execute="X"/>
-                    </h:inputText>
-                </div>
-
-                <div class="textY">
-                    <label>
-                        <strong>Enter Y in [-3;3]:</strong>
-                        <span class="exceptionY"></span>
-                        <h:inputText id="y_in" value="#{Check.y}" maxlength="25">
-                            <f:validateDoubleRange minimum="-3.0" maximum="3.0" />
-                            <!--                        <ace:ajax execute="y" render="exceptionY"/>-->
-                        </h:inputText>
-                    </label>
-                </div>
-
-                <div class="radioR">
-                    <label>
-                        <strong>Choose R:</strong>
-                        <h:selectOneRadio value="#{Check.r}" id="r_in" shape="circle">
-                            <f:selectItem styleClass="radioItem" itemValue = "1" itemLabel = "1" />
-                            <f:selectItem styleClass="radioItem" itemValue = "1.5" itemLabel = "1.5" />
-                            <f:selectItem styleClass="radioItem" itemValue = "2" itemLabel = "2" />
-                            <f:selectItem styleClass="radioItem" itemValue = "2.5" itemLabel = "2.5" />
-                            <f:selectItem styleClass="radioItem" itemValue = "3" itemLabel = "3" />
-                        </h:selectOneRadio>
-                    </label>
-                </div>
-
-                <div class="send_but">
-                    <h:commandButton id="send" value="Отправить" action="#{Check.newPoint()}">
-                        <f:ajax execute="@form" render="table" />
-                    </h:commandButton>
-                </div>
+        <div class="xyr_in" id="form">
+            <div class="x_in">
+                <strong class="chooseX">Choose X:</strong>
+                <h:inputText id="slider_x" value="#{Check.x}" min="-2" max="2" stepPercent="10">
+                    <ace:ajax render="xValue" event="slide" execute="X"/>
+                </h:inputText>
             </div>
-        </h:form>
+
+            <div class="textY">
+                <label>
+                    <strong>Enter Y in [-3;3]:</strong>
+                    <span class="exceptionY"></span>
+                    <h:inputText id="y_in" value="#{Check.y}" maxlength="25">
+                        <f:validateDoubleRange minimum="-3.0" maximum="3.0" />
+                        <!--                        <ace:ajax execute="y" render="exceptionY"/>-->
+                    </h:inputText>
+                </label>
+            </div>
+
+            <div class="radioR">
+                <label>
+                    <strong>Choose R:</strong>
+                    <h:selectOneRadio value="#{Check.r}" id="r_in" shape="circle">
+                        <f:selectItem styleClass="radioItem" itemValue = "1" itemLabel = "1" />
+                        <f:selectItem styleClass="radioItem" itemValue = "1.5" itemLabel = "1.5" />
+                        <f:selectItem styleClass="radioItem" itemValue = "2" itemLabel = "2" />
+                        <f:selectItem styleClass="radioItem" itemValue = "2.5" itemLabel = "2.5" />
+                        <f:selectItem styleClass="radioItem" itemValue = "3" itemLabel = "3" />
+                    </h:selectOneRadio>
+                </label>
+            </div>
+
+            <div class="send_but">
+                <h:commandButton id="send" value="Отправить" action="#{Check.newPoint()}">
+                    <f:ajax execute="@form" render="table" />
+                </h:commandButton>
+            </div>
+        </div>
 
         <h:panelGroup>
             <ui:repeat value="#{Check.points}" var="point">

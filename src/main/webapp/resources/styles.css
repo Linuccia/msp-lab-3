@@ -105,7 +105,7 @@ button, select, input:focus{
     margin-right: 0.5%;
     box-shadow: inset 0 0 6px;
 }
-#j_idt10\:y_in{
+#y_in{
     width: 95%;
     height: 35%;
     border-radius: 20px;
@@ -128,7 +128,7 @@ button, select, input:focus{
     margin-left: 0.5%;
     box-shadow: inset 0 0 6px;
 }
-#j_idt10\:r_in {
+#r_in {
     width: 98%;
     height: 35%;
     padding-left: 1%;
@@ -154,15 +154,7 @@ input[type="radio"] {
     padding-left: 14%;
     box-shadow: inset 0 0 6px;
 }
-/*}*/
-/*.send_but_text{*/
-/*    color: black;*/
-/*    font-weight: bold;*/
-/*}*/
-/*.send_but_text:hover{*/
-/*    color: white;*/
-/*}*/
-#j_idt10\:send{
+#send{
     cursor: pointer;
     padding: 10px;
     border-radius: 30px;
@@ -193,10 +185,6 @@ input[type="radio"] {
     border: solid 1px white;
     border-collapse: collapse;
 }
-/*.result td{*/
-/*    border: solid 1px white;*/
-/*    border-collapse: collapse;*/
-/*}*/
 #point{
     transition: all 1s;
 }
@@ -216,7 +204,7 @@ input[type="radio"] {
     font-size: large;
     font-family: Jura, sans-serif;
 }
-#j_idt10\:send:hover, #toStart:hover, #redirect:hover{
+#send:hover, #toStart:hover, #redirect:hover{
     color: white;
 }
 #toStart{
