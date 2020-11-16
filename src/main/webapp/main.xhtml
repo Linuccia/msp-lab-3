@@ -30,10 +30,10 @@
         <h:form id="form">
             <div class="xyr_in">
                 <div class="x_in">
-                    <strong class="chooseX">Choose X:</strong>
-                    <h:inputText id="slider_x" value="#{Check.x}">
-<!--                        <ace:ajax render="xValue" event="slide" execute="X"/>-->
-                    </h:inputText>
+                    <strong class="chooseX">Choose X:  </strong><h:outputText id="xValue" value="#{Check.x}"/>
+                    <ace:sliderEntry id="slider_x" value="#{Check.x}" min="-2" max="2" stepPercent="25">
+                        <ace:ajax render="xValue" event="slideEnd" execute="@this"/>
+                    </ace:sliderEntry>
                 </div>
 
                 <div class="textY">
