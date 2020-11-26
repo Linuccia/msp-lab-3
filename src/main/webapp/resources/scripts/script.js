@@ -1,7 +1,7 @@
 function XYR(){
-    x = $('#xValue').val();
-    y = $('#y_in').val();
-    r = $('input[name=r]:checked').val();
+    $("input[name='form:slider_x_hidden']").val();
+    y = $("input[name='form:y_in']").val();
+    r = $("input[name='form:r_in']:checked").val();
 }
 
 function checkY(x, y, r) {
