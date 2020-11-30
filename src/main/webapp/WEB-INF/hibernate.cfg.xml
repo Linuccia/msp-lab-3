@@ -13,4 +13,14 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
         <mapping class="Point"/>
     </session-factory>
+<!--    <session-factory>-->
+<!--        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>-->
+<!--        <property name="hibernate.connection.url">jdbc:postgresql://localhost/studs</property>-->
+<!--        <property name="hibernate.connection.password">uhm562</property>-->
+<!--        <property name="hibernate.connection.username">s285608</property>-->
+<!--        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>-->
+<!--        <property name="show_sql">true</property>-->
+<!--        <property name="hibernate.hbm2ddl.auto">update</property>-->
+<!--        <mapping class="Point"/>-->
+<!--    </session-factory>-->
 </hibernate-configuration>

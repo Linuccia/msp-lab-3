@@ -4,8 +4,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class CheckArea {
-    private Integer x = -2;
-    private Double y = -3.0;
+    private Integer x = 0;
+    private Double y = 0.0;
     private Double r = 1.0;
     private Boolean hit = false;
     private Long startTime;
@@ -32,7 +32,7 @@ public class CheckArea {
 
     public void setHit(){
         startTime = System.nanoTime();
-        if (x >= 0 && y >= 0 && y <= -x/2 + r/2){
+        if (x >= 0 && y >= 0 && y <= -x/2.0 + r/2){
             hit = true;
             return;
         }

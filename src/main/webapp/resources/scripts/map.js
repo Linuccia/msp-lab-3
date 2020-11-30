@@ -22,8 +22,7 @@ function clickGraph() {
 }
 
 function point1(x, y, r) {
-    $('#point').attr('cx', x*120/r + 200)
-        .attr('cy', 200 - y*120/r );
+    $('#point').attr('cx', x*120/r + 200).attr('cy', 200 - y*120/r );
 }
 
 function getMousePosition(svg, event) {

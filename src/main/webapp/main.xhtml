@@ -65,21 +65,11 @@
 
                 <div class="send_but">
                     <h:commandButton id="send" value="Отправить" action="#{Check.newPoint()}">
-                        <f:ajax execute="@form" render="graphTable" />
+                        <f:ajax execute="@form" render="ajaxTable" />
                     </h:commandButton>
                 </div>
             </div>
         </h:form>
-
-        <h:panelGroup id="graphTable">
-            <ui:repeat value="#{Check.points}" var="point">
-                <h:outputScript>
-                    var x = "#{point.x}";
-                    var y = "#{point.y}";
-                    var r = "#{point.r}";
-                    drawPoints(x, y, r);
-                </h:outputScript>
-            </ui:repeat>
 
             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="400" height="400" id="graph" class="graph" onclick="clickGraph()">
                 <line class="axes" x1="0" x2="400" y1="200" y2="200" stroke="black"></line>
@@ -119,6 +109,16 @@
 
                 <circle r="3" cx="200" cy="200" id="point" fill="black" ></circle>
             </svg>
+
+        <h:panelGroup id="ajaxTable">
+            <ui:repeat value="#{Check.points}" var="point">
+                <h:outputScript>
+                    var x = "#{point.x}";
+                    var y = "#{point.y}";
+                    var r = "#{point.r}";
+                    drawPoints(x, y, r);
+                </h:outputScript>
+            </ui:repeat>
 
             <h:dataTable value="#{Check.points}" var="point" styleClass="result" cellspacing="0" headerClass="result_head">
                 <h:column>
