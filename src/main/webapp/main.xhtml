@@ -27,21 +27,21 @@
         <h:form id="form">
             <div class="xyr_in">
                 <div class="x_in">
-                    <strong class="chooseX">Choose X:  </strong><h:outputLabel class="xValue" id="xValue" value="#{Check.x}"/>
-                    <ace:sliderEntry id="slider_x" value="#{Check.x}" min="-2" max="2" stepPercent="25">
-                        <ace:ajax render="xValue" event="slideEnd" execute="@this"/>
+                    <strong class="chooseX">Choose X:  </strong><h:outputLabel class="xValue" id="xValue"  value="#{Check.x}" />
+                    <ace:sliderEntry id="slider_x" value="#{Check.x}" onSlide="change()" min="-2" max="2" stepPercent="25">
+                        <ace:ajax render="xValue" event="slide" execute="@this"/>
                     </ace:sliderEntry>
                 </div>
 
                 <div class="textY">
                     <label>
                         <strong>Enter Y in [-3;3]:</strong>
-<!--                        <h:outputLabel class="yValue" id="Y" value="#{Check.y}"/>-->
+                        <!--                        <h:outputLabel class="yValue" id="Y" value="#{Check.y}"/>-->
                         <span class="exceptionY"></span>
-<!--                        <h:message  id="exceptionY" for="y_in"/>-->
-                        <h:inputText id="y_in" value="#{Check.y}" maxlength="25">
+                        <!--                        <h:message  id="exceptionY" for="y_in"/>-->
+                        <h:inputText id="y_in" value="#{Check.y}" maxlength="25" onchange="change()">
                             <f:validateDoubleRange minimum="-3.0" maximum="3.0" />
-<!--                            <ace:ajax execute="y_in" render="exceptionY"/>-->
+                            <!--                            <ace:ajax execute="y_in" render="exceptionY"/>-->
                         </h:inputText>
 
                     </label>
@@ -50,15 +50,16 @@
                 <div class="radioR">
                     <label>
                         <strong>Choose R:</strong>
-<!--                        <h:outputLabel class="rValue" id="R" value="#{Check.r}"/>-->
-                        <h:selectOneRadio value="#{Check.r}" id="r_in" shape="circle">
+                        <!--                        <h:outputLabel class="rValue" id="R" value="#{Check.r}"/>-->
+                        <h:selectOneRadio value="#{Check.r}" id="r_in" shape="circle" onchange="change()" >
                             <f:selectItem styleClass="radioItem" itemValue = "1" itemLabel = "1" />
                             <f:selectItem styleClass="radioItem" itemValue = "1.5" itemLabel = "1.5" />
                             <f:selectItem styleClass="radioItem" itemValue = "2" itemLabel = "2" />
                             <f:selectItem styleClass="radioItem" itemValue = "2.5" itemLabel = "2.5" />
                             <f:selectItem styleClass="radioItem" itemValue = "3" itemLabel = "3" />
+                            <ace:ajax execute="r_in" render="r_value"/>
                         </h:selectOneRadio>
-
+                        <h:inputHidden id="r_value"  value="#{Check.r}"/>
                     </label>
                 </div>
 
@@ -73,11 +74,14 @@
         <h:panelGroup id="graphTable">
             <ui:repeat value="#{Check.points}" var="point">
                 <h:outputScript>
-                    drawPoints(point.x, point.y, point.r);
+                    var x = "#{point.x}";
+                    var y = "#{point.y}";
+                    var r = "#{point.r}";
+                    drawPoints(x, y, r);
                 </h:outputScript>
             </ui:repeat>
 
-            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="400" height="400" id="graph" class="graph">
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="400" height="400" id="graph" class="graph" onclick="clickGraph()">
                 <line class="axes" x1="0" x2="400" y1="200" y2="200" stroke="black"></line>
                 <line x1="200" x2="200" y1="0" y2="400" stroke="black"></line>
                 <polygon points="200,0 194,25 206,25" stroke="black"></polygon>

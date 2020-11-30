@@ -1,26 +1,25 @@
-x = $("input[name='form:slider_x_hidden']").val();
-y = $("input[name='form:y_in']").val();
-r = $("input[name='form:r_in']:checked").val();
-
 let svg = document.getElementById('graph');
 
-$(function () {
-    $('.graph').on('click', function (event) {
+function clickGraph() {
+    $('.graph').on('click', function click(event) {
+        let r = $("input[id='form:r_value']").val();
         let position = getMousePosition(svg, event);
         let x = position.x;
         let y = position.y;
         let y_val = ((200 - y) * r / 120).toFixed(4);
-        if (y_val > 3) y = 3;
-        if (y_val < -3) y = -3;
+        if (y_val > 3) y_val = 3;
+        if (y_val < -3) y_val = -3;
         let x_val = (((x - 200) * r / 120)).toFixed();
-        if (x_val > 2) y = 2;
-        if (x_val < -2) y = -2;
+        if (x_val >= 2) x_val = 2;
+        if (x_val <= -2) x_val = -2;
+        if (x_val === "-0") x_val = 0;
         point1(x_val, y_val, r);
         $("a[id='form:slider_x_handle']").attr("style", "left: "+(50 + x_val*25)+"%");
-        $("label[id='form:xValue']").val(x_val);
+        $("input[id='form:slider_x_hidden']").attr("value",x_val);
+        $("label[id='form:xValue']").text(x_val);
         $("input[name='form:y_in']").val(y_val);
     });
-});
+}
 
 function point1(x, y, r) {
     $('#point').attr('cx', x*120/r + 200)
@@ -33,4 +32,24 @@ function getMousePosition(svg, event) {
         x: event.clientX - rect.left,
         y: event.clientY - rect.top
     };
+}
+
+function drawPoints(x, y, r) {
+    if (getHit(x, y, r) === true) {
+        document.querySelector('.graph').innerHTML += '<circle r="3" cx="' + (x * 120 / r + 200) +
+            '" cy="' + (y * -120 / r + 200) + '" fill="yellow" ></circle>'
+    } else {
+        document.querySelector('.graph').innerHTML += '<circle r="3" cx="' + (x * 120 / r + 200) +
+            '" cy="' + (y * -120 / r + 200) + '" fill="red" ></circle>'
+    }
+}
+
+function getHit(x, y, r) {
+    if (x >= 0 && y >= 0 && y <= -x/2 + r/2){
+        return true
+    }
+    if (x >= 0 && y <= 0 && x*x + y*y <= r*r/4){
+        return true
+    }
+    return (x <= 0 && y >= 0 && x >= -r/2 && y <= r)
 }

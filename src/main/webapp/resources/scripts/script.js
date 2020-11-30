@@ -1,10 +1,10 @@
 function XYR(){
-    $("input[name='form:slider_x_hidden']").val();
+    x = $("input[name='form:slider_x_hidden']").val();
     y = $("input[name='form:y_in']").val();
-    r = $("input[name='form:r_in']:checked").val();
+    r = $("input[id='form:r_value']").val();
 }
 
-function checkY(x, y, r) {
+function checkY(x, y) {
     if (!y) {
         return exceptionY('<br>Вы не ввели Y</br>')
     } else if (isNaN(y)) {
@@ -19,7 +19,7 @@ function checkY(x, y, r) {
 
 function exceptionY(message) {
     $(".exceptionY").html(message);
-    point(0,0, 2);
+    point(0,0, 1);
     return false
 }
 
@@ -36,45 +36,21 @@ $(function () {
     //     event.preventDefault()
     //     }
     // });
-    $('.sliderX').on('input', function (){
-        XYR();
-        if (checkY(x,y,r))
-            point(x, y, r);
-    });
-    $('.y_in').on('input', function (){
-        XYR();
-        if (checkY(x,y,r))
-            point(x, y, r);
-    });
-    $('.r_in').on('input', function (){
-        XYR();
-        if (checkY(x,y,r))
-            point(x, y, r);
-    })
 
 });
+
+function change() {
+    setTimeout(function(){
+        XYR();
+        if (checkY(x,y))
+            point(x, y, r);
+    }, 150);
+
+}
+
 
 function point(x, y, r) {
     $('#point').attr("cx", (x * 120 / r + 200))
         .attr("cy", (y * -120 / r + 200));
 }
 
-function drawPoints(x, y, r) {
-    if (getHit(x, y, r) === true) {
-        document.querySelector('.graph').innerHTML += '<circle r="3" cx="' + (x * 120 / r + 200) +
-            '" cy="' + (y * -120 / r + 200) + '" fill="yellow" ></circle>'
-    } else {
-        document.querySelector('.graph').innerHTML += '<circle r="3" cx="' + (x * 120 / r + 200) +
-            '" cy="' + (y * -120 / r + 200) + '" fill="red" ></circle>'
-    }
-}
-
-function getHit(x, y, r) {
-    if (x >= 0 && y >= 0 && x <= 2*y + r){
-        return true
-    }
-    if (x <= 0 && y <= 0 && x*x + y*y <= r*r/4){
-        return true
-    }
-    return (x <= 0 && y >= 0 && x <= -r/2 && y <= r)
-}
