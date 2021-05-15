@@ -10,7 +10,7 @@ public class Point {
     @Column(name = "id", nullable = false)
     private Integer id;
     @Column(name = "x", nullable = false)
-    private Integer x;
+    private Double x;
     @Column(name = "y", nullable = false)
     private Double y;
     @Column(name = "r", nullable = false)
@@ -23,7 +23,7 @@ public class Point {
     private Long runtime;
 
 
-    public Point(Integer x, Double y, Double r, Boolean hit, LocalTime time, Long runtime){
+    public Point(Double x, Double y, Double r, Boolean hit, LocalTime time, Long runtime){
         this.x = x;
         this.y = y;
         this.r = r;
@@ -32,10 +32,10 @@ public class Point {
         this.runtime = runtime;
     }
 
-    public Integer getX(){
+    public Double getX(){
         return x;
     }
-    public void setX(Integer x){this.x = x;}
+    public void setX(Double x){this.x = x;}
 
     public Double getY(){
         return y;

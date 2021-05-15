@@ -52,3 +52,21 @@ function getHit(x, y, r) {
     }
     return (x <= 0 && y >= 0 && x >= -r/2 && y <= r)
 }
+
+// function drawPoints() {
+//     let rows = document.getElementById('table_data').childNodes;
+//     rows.forEach(row => {
+//         let a = row.childNodes;
+//         let b = a[0].innerHTML;
+//         let c = a[1].innerHTML;
+//         let d = r;
+//         let res;
+//         if (a[3].innerHTML === "true") {
+//             res = "yellow";
+//         } else {
+//             res = "red";
+//         }
+//         document.querySelector('.graph').innerHTML += '<circle r="3" cx="' + (b * 120 /d + 200) +
+//             '" cy="' + (c * -120 / d + 200) + '" fill="' + res + " ></circle>"
+//     })
+// }

@@ -22,11 +22,6 @@ public class CheckAreaTest {
         return Arrays.asList(new Object[][] { {1.0}, {1.5}, {2.0}, {2.5}, {3.0} });
     }
 
-//    @BeforeAll
-//    static void setUp() {
-//        check = new CheckArea();
-//    }
-
     @Test
     public void rectangleLeftUpCornerIn() {
         x = -r/2;

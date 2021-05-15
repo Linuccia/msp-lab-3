@@ -36,12 +36,9 @@
                 <div class="textY">
                     <label>
                         <strong>Enter Y in [-3;3]:</strong>
-                        <!--                        <h:outputLabel class="yValue" id="Y" value="#{Check.y}"/>-->
                         <span class="exceptionY"></span>
-                        <!--                        <h:message  id="exceptionY" for="y_in"/>-->
                         <h:inputText id="y_in" value="#{Check.y}" maxlength="25" onchange="change()">
                             <f:validateDoubleRange minimum="-3.0" maximum="3.0" />
-                            <!--                            <ace:ajax execute="y_in" render="exceptionY"/>-->
                         </h:inputText>
 
                     </label>
@@ -50,16 +47,15 @@
                 <div class="radioR">
                     <label>
                         <strong>Choose R:</strong>
-                        <!--                        <h:outputLabel class="rValue" id="R" value="#{Check.r}"/>-->
-                        <h:selectOneRadio value="#{Check.r}" id="r_in" shape="circle" onchange="change()" >
-                            <f:selectItem styleClass="radioItem" itemValue = "1" itemLabel = "1" />
-                            <f:selectItem styleClass="radioItem" itemValue = "1.5" itemLabel = "1.5" />
-                            <f:selectItem styleClass="radioItem" itemValue = "2" itemLabel = "2" />
-                            <f:selectItem styleClass="radioItem" itemValue = "2.5" itemLabel = "2.5" />
-                            <f:selectItem styleClass="radioItem" itemValue = "3" itemLabel = "3" />
+                        <h:selectOneRadio value="#{Check.point2}" id="r_in" shape="circle" onchange="change()" >
+                            <f:selectItem styleClass="radioItem" itemValue = "#{Check.point}" itemLabel = "1" />
+<!--                            <f:selectItem styleClass="radioItem" itemValue = "1.5" itemLabel = "1.5" />-->
+<!--                            <f:selectItem styleClass="radioItem" itemValue = "2" itemLabel = "2" />-->
+<!--                            <f:selectItem styleClass="radioItem" itemValue = "2.5" itemLabel = "2.5" />-->
+<!--                            <f:selectItem styleClass="radioItem" itemValue = "3" itemLabel = "3" />-->
                             <ace:ajax execute="r_in" render="r_value"/>
+                            <h:outputText id="r_value"  value="#{Check.point2}"/>
                         </h:selectOneRadio>
-                        <h:inputHidden id="r_value"  value="#{Check.r}"/>
                     </label>
                 </div>
 
@@ -120,7 +116,7 @@
                 </h:outputScript>
             </ui:repeat>
 
-            <h:dataTable value="#{Check.points}" var="point" styleClass="result" cellspacing="0" headerClass="result_head">
+            <h:dataTable value="#{Check.points}" var="point" styleClass="result" cellspacing="0" headerClass="result_head" id="table">
                 <h:column>
                     <f:facet name="header">X</f:facet>
                     #{point.x}

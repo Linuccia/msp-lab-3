@@ -23,29 +23,13 @@ function exceptionY(message) {
     return false
 }
 
-$(function () {
-    // $('#send').on('click', function (event) {
-    // XYR();
-    // if(checkY(x, y, r)) {
-    //     $.get(
-    //     "/CheckArea",
-    //     {x: x, y: y, r: r}
-    //     )
-    //     // drawPoints(x, y, r)
-    // } else {
-    //     event.preventDefault()
-    //     }
-    // });
-
-});
-
 function change() {
     setTimeout(function(){
         XYR();
         if (checkY(x,y))
             point(x, y, r);
     }, 150);
-
+    drawPoints();
 }
 
 
