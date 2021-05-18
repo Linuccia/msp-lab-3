@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2004-2014 ICEsoft Technologies Canada Corp.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the
+  ~ License. You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an "AS
+  ~ IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
+  ~ express or implied. See the License for the specific language
+  ~ governing permissions and limitations under the License.
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.icefaces</groupId>
+        <artifactId>bundle-parent</artifactId>
+        <version>4.3.0</version>
+        <relativePath>..</relativePath>
+    </parent>
+
+    <artifactId>${icefaces.lib.name}-ace</artifactId>
+    <packaging>pom</packaging>
+    <name>${icefaces.product.name} ACE Components</name>
+    <url>http://www.icesoft.org</url>
+    <description>${icefaces.product.name} ACE Component Library</description>
+
+		<modules>
+       <module>themes</module>
+   </modules>
+
+    <build>
+        <plugins>
+
+            <!-- Ant tasks that need to run -->
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+
+                    <!-- Run the default Ant build to clean everything -->
+                    <execution>
+                        <id>clean-all</id>
+                        <phase>clean</phase>
+                        <configuration>
+                            <target>
+                                <ant antfile="./build.xml" target="clean" />
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+
+                    <!-- Run the default Ant build to build everything -->
+                    <execution>
+                        <id>compile-all</id>
+                        <phase>compile</phase>
+                        <configuration>
+                            <target>
+                                <ant antfile="./build.xml" />
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+
+                    <!-- Generate JavaDoc files using Ant during "package" phase -->
+                    <execution>
+                        <id>gen-javadocs</id>
+                        <phase>verify</phase>
+                        <configuration>
+                            <target>
+                                <ant dir="./component" antfile="build.xml" target="javadoc-no-compile" />
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+            </plugin>
+
+            <!-- Since we still rely on Ant and pre-built jars, we use this plugin to simply add
+                 the jar in as an artifact and it gets injected into the build phases for normal
+                 installation and deployment.  -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <id>attach-artifacts</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>attach-artifact</goal>
+                        </goals>
+                        <configuration>
+                            <artifacts>
+                                <artifact>
+                                    <file>./component/dist/${icefaces.lib.name}-ace.jar</file>
+                                    <type>jar</type>
+                                </artifact>
+                            </artifacts>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <!-- The following two plugins are the way that are supposed to be used to
+                 add source directories for creating the sources jar file but it doesn't
+                 seem to work.  So instead we use the assembly method until we can
+                 re-arrange the layout to better suit Maven conventions. -->
+
+            <!-- This plugin allows us to have more than a single path to the source
+                 files as we are dealing with code from both component and core. -->
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>build-helper-maven-plugin</artifactId>-->
+                <!--<version>1.7</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>add-source</id>-->
+                        <!--<phase>generate-sources</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>add-source</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<sources>-->
+                                <!--<source>./component/src</source>-->
+                            <!--</sources>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
+
+            <!--<plugin>-->
+                <!--<groupId>org.apache.maven.plugins</groupId>-->
+                <!--<artifactId>maven-source-plugin</artifactId>-->
+                <!--<version>2.1.2</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>attach-sources</id>-->
+                        <!--<goals>-->
+                            <!--<goal>jar-no-fork</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
+
+            <!-- Since I couldn't get the above strategy to work for the source files, I used this
+                 assembly approach instead. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>assemble-sources.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Builds the JavaDocs jar -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <phase>verify</phase>
+                        <configuration>
+                            <classifier>javadoc</classifier>
+                            <classesDirectory>./component/build/doc/javadoc</classesDirectory>
+                        </configuration>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
+
+    </build>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>${icefaces.product.group}</groupId>
+            <artifactId>${icefaces.lib.name}</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <profiles>
+
+        <!-- Not sure why but when I tried to put this in the top-level parent pom, it would sign all the artifacts
+             but would only deploy the signatures for the main .jar and not the the sources and javadoc jars. It
+             apparently works fine if the profile is defined in each project so that's what I've done for now. -->
+        <profile>
+            <id>sign-artifacts</id>
+            <activation>
+                <!--<activeByDefault>true</activeByDefault>-->
+                <property>
+                    <name>signArtifacts</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>sign-library</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+ 								<configuration>
+				    				<keyname>${gpg.keyname}</keyname>
+        							<passphraseServerId>${gpg.keyname}</passphraseServerId>
+            					</configuration> 
+            				</execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+    </profiles>
+
+</project>

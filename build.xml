@@ -1,0 +1,101 @@
+<project name="Web3" xmlns:ivy="antlib:org.apache.ivy.ant" default="build">
+
+    <loadproperties srcfile="apacheAnt.properties"/>
+
+<!--    Загрузка библиотек -->
+    <target name="resolve">
+        <ivy:retrieve/>
+    </target>
+
+    <path id="build-path">
+        <fileset dir="${lib}" includes="*.jar"/>
+    </path>
+
+    <path id="test-path">
+        <path refid="build-path"/>
+        <pathelement location="${classes}"/>
+    </path>
+
+<!--    Компиляция исходников тестов проекта -->
+    <target name="compile">
+        <echo>Compiling project classes</echo>
+        <mkdir dir="${classes}"/>
+        <javac destdir="${classes}" srcdir="${main}" includeantruntime="false">
+            <classpath refid="build-path"/>
+        </javac>
+
+        <echo>Compiling test classes</echo>
+        <mkdir dir="${tests}"/>
+        <javac destdir="${tests}" srcdir="${test}" includeantruntime="false">
+            <classpath refid="test-path"/>
+        </javac>
+        <echo>Compilation done</echo>
+    </target>
+
+<!--    Компиляция исходников проекта и упаковка в war-архив -->
+    <target name="build" depends="compile">
+        <echo>Build project</echo>
+        <mkdir dir="${out}"/>
+        <war destfile="${out}/${ant.project.name}.war" webxml="${web}">
+            <classes dir="${classes}"/>
+            <lib dir="${lib}"/>
+            <fileset dir="${main}/webapp"/>
+            <manifest>
+                <attribute name="Created-By" value="Web" />
+                <attribute name="Manifest-Version" value="1.0" />
+                <attribute name="Main-Class" value="NoClass" />
+            </manifest>
+        </war>
+        <echo>Build succesfull</echo>
+    </target>
+
+<!--    Удаление скомпилированных файлов -->
+    <target name="clean">
+        <echo>Cleaning compilated files</echo>
+        <delete dir="${build}"/>
+    </target>
+
+<!--    Запуск JUnit-теста с предварительной сборкой проекта-->
+    <target name="test" depends="build">
+        <echo>Testing the project</echo>
+        <junit printsummary="yes" haltonerror="yes" haltonfailure="yes">
+            <classpath>
+                <pathelement path="${classes}"/>
+                <path refid="test-path"/>
+                <pathelement location="${tests}"/>
+            </classpath>
+            <test name="${test_name}"/>
+        </junit>
+        <echo>Testing done</echo>
+    </target>
+
+<!--    Преобразование native2ascii для копий файлов локализации -->
+    <target name="native2ascii">
+        <echo>Converting file from UTF-8 to ASCII</echo>
+        <native2ascii includes="${localization}" dest="." ext="ascii.properties" encoding="UTF-8"/>
+        <echo>Converting done</echo>
+    </target>
+
+<!--    Создание альтернативной версии программы с измененными именами класса и переменной и упаковка в war-архив -->
+    <target name="alt">
+        <echo>Creating an alternative version of program</echo>
+        <echo>Changing 1 class name and 2 variable names</echo>
+        <copy todir="${src_old}">
+            <fileset dir="${src}"/>
+        </copy>
+        <replaceregexp file="${main}/java/CheckArea.java" match="CheckArea" replace="AreaController" flags="g"/>
+        <replaceregexp file="${main}/java/CheckArea.java" match="startTime" replace="begTime" flags="g"/>
+        <move file="${main}/java/CheckArea.java" tofile="${main}/java/AreaController.java"/>
+        <replaceregexp file="${test}/java/CheckAreaTest.java" match="CheckArea" replace="AreaController" flags="g"/>
+        <replaceregexp file="${test}/java/CheckAreaTest.java" match="check" replace="controller" flags="g"/>
+        <move file="${test}/java/CheckAreaTest.java" tofile="${test}/java/AreaControllerTest.java"/>
+        <antcall target="build"/>
+        <delete dir="${src}"/>
+        <copy todir="${src}">
+            <fileset dir="${src_old}"/>
+        </copy>
+        <delete dir="${src_old}"/>
+        <echo>War-archive created. Previous version of the project was restored</echo>
+    </target>
+
+</project>

@@ -23,6 +23,20 @@ public class CheckAreaTest {
     }
 
     @Test
+    public void rectangleLeftDownCornerIn() {
+        x = -r/2;
+        y = 0;
+        assertTrue(check.getHit(x, y, r));
+    }
+
+    @Test
+    public void rectangleLeftDownCornerOut() {
+        x = -r/2 - 0.00000000000001;
+        y = 0;
+        assertFalse(check.getHit(x, y, r));
+    }
+
+    @Test
     public void rectangleLeftUpCornerIn() {
         x = -r/2;
         y = r;
@@ -31,8 +45,8 @@ public class CheckAreaTest {
 
     @Test
     public void rectangleLeftUpCornerOut() {
-        x = -r/2 - 0.0000000000000001;
-        y = r + 0.0000000000000001;
+        x = -r/2 - 0.00000000000001;
+        y = r + 0.00000000000001;
         assertFalse(check.getHit(x, y, r));
     }
 
@@ -45,8 +59,8 @@ public class CheckAreaTest {
 
     @Test
     public void rectangleRightUpCornerOut() {
-        x = 0 + 0.0000000000000001;
-        y = r + 0.0000000000000001;
+        x = 0 + 0.00000000000001;
+        y = r + 0.00000000000001;
         assertFalse(check.getHit(x, y, r));
     }
 
@@ -59,7 +73,7 @@ public class CheckAreaTest {
 
     @Test
     public void rectangleTriangleCornerOut() {
-        x = 0 + 0.0000000000000001;
+        x = 0 + 0.00000000000001;
         y = r/2;
         assertFalse(check.getHit(x, y, r));
     }
@@ -73,7 +87,7 @@ public class CheckAreaTest {
 
     @Test
     public void triangleRightCornerOut() {
-        x = r + 0.0000000000000001;
+        x = r + 0.00000000000001;
         y = 0;
         assertFalse(check.getHit(x, y, r));
     }
@@ -87,8 +101,8 @@ public class CheckAreaTest {
 
     @Test
     public void triangleRightMedianOut() {
-        x = r/2 + 0.0000000000000001;
-        y = r/4 + 0.0000000000000001;
+        x = r/2 + 0.00000000000001;
+        y = r/4 + 0.00000000000001;
         assertFalse(check.getHit(x, y, r));
     }
 
@@ -102,7 +116,7 @@ public class CheckAreaTest {
     @Test
     public void circleLowerBorderOut() {
         x = 0;
-        y = -r/2 - 0.0000000000000001;
+        y = -r/2 - 0.00000000000001;
         assertFalse(check.getHit(x, y, r));
     }
 
@@ -115,22 +129,8 @@ public class CheckAreaTest {
 
     @Test
     public void circleTriangleCornerOut() {
-        x = r/2 + 0.0000000000000001;
-        y = 0 - 0.0000000000000001;
-        assertFalse(check.getHit(x, y, r));
-    }
-
-    @Test
-    public void circleArcMiddleIn() {
-        x = r/4;
-        y = -r/4;
-        assertTrue(check.getHit(x, y, r));
-    }
-
-    @Test
-    public void circleArcMiddleOut() {
-        x = r/4 + 0.0000000000000001;
-        y = -r/4 - 0.0000000000000001;
+        x = r/2 + 0.00000000000001;
+        y = 0 - 0.00000000000001;
         assertFalse(check.getHit(x, y, r));
     }
 
@@ -143,8 +143,8 @@ public class CheckAreaTest {
 
     @Test
     public void middleOut() {
-        x = 0 - 0.0000000000000001;
-        y = 0 - 0.0000000000000001;
+        x = 0 - 0.00000000000001;
+        y = 0 - 0.00000000000001;
         assertFalse(check.getHit(x, y, r));
     }
 }
