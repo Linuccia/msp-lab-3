@@ -58,13 +58,14 @@
 <!--    Запуск JUnit-теста с предварительной сборкой проекта-->
     <target name="test" depends="build">
         <echo>Testing the project</echo>
-        <junit printsummary="yes" haltonerror="yes" haltonfailure="yes">
+        <junit printsummary="yes" haltonerror="yes">
             <classpath>
                 <pathelement path="${classes}"/>
                 <path refid="test-path"/>
                 <pathelement location="${tests}"/>
             </classpath>
             <test name="${test_name}"/>
+            <formatter type="plain" usefile="false"/>
         </junit>
         <echo>Testing done</echo>
     </target>
@@ -76,19 +77,22 @@
         <echo>Converting done</echo>
     </target>
 
-<!--    Создание альтернативной версии программы с измененными именами класса и переменной и упаковка в war-архив -->
+<!--    Создание альтернативной версии программы с измененными именами класса и переменных и упаковка в war-архив -->
     <target name="alt">
         <echo>Creating an alternative version of program</echo>
-        <echo>Changing 1 class name and 2 variable names</echo>
+        <echo>Changing 2 classes names and 2 variables names</echo>
         <copy todir="${src_old}">
             <fileset dir="${src}"/>
         </copy>
-        <replaceregexp file="${main}/java/CheckArea.java" match="CheckArea" replace="AreaController" flags="g"/>
-        <replaceregexp file="${main}/java/CheckArea.java" match="startTime" replace="begTime" flags="g"/>
-        <move file="${main}/java/CheckArea.java" tofile="${main}/java/AreaController.java"/>
-        <replaceregexp file="${test}/java/CheckAreaTest.java" match="CheckArea" replace="AreaController" flags="g"/>
-        <replaceregexp file="${test}/java/CheckAreaTest.java" match="check" replace="controller" flags="g"/>
-        <move file="${test}/java/CheckAreaTest.java" tofile="${test}/java/AreaControllerTest.java"/>
+<!--        <replaceregexp file="${main}/java/CheckArea.java" match="CheckArea" replace="AreaController" flags="g"/>-->
+<!--        <replaceregexp file="${main}/java/CheckArea.java" match="startTime" replace="begTime" flags="g"/>-->
+<!--        <move file="${main}/java/CheckArea.java" tofile="${main}/java/AreaController.java"/>-->
+<!--        <replaceregexp file="${test}/java/CheckAreaTest.java" match="CheckArea" replace="AreaController" flags="g"/>-->
+<!--        <replaceregexp file="${test}/java/CheckAreaTest.java" match="check" replace="controller" flags="g"/>-->
+<!--        <move file="${test}/java/CheckAreaTest.java" tofile="${test}/java/AreaControllerTest.java"/>-->
+        <replace dir="${src}" replacefilterfile="${altProp}"/>
+        <move file="${changeClass}" tofile="${newClass}"/>
+        <move file="${changeTest}" tofile="${newTest}"/>
         <antcall target="build"/>
         <delete dir="${src}"/>
         <copy todir="${src}">
